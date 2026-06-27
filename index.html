@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos por Cuenta Contrato - EAAB ESP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           VARIABLES Y RESET
+        ========================================= */
+        :root {
+            --primary-blue: #155bbb; /* Azul del header y botones */
+            --primary-blue-hover: #104a9e; /* Azul oscuro para hover */
+            --text-heading: #4b5563; /* Gris oscuro para el título */
+            --text-body: #6b7280;    /* Gris medio para el párrafo */
+            --bg-body: #ffffff;
+            --font-main: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           HEADER
+        ========================================= */
+        .header {
+            background-color: var(--primary-blue);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: flex-end; /* Logo alineado a la derecha en escritorio */
+            align-items: center;
+            height: 80px;
+        }
+
+        .header-logo {
+            height: 45px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                justify-content: flex-start; /* Logo a la izquierda en móvil */
+            }
+        }
+
+        /* =========================================
+           BANNER DE IMAGEN (HERO)
+        ========================================= */
+        .hero-banner {
+            width: 100%;
+            height: 350px; /* Altura aproximada de la imagen original */
+            background-color: #e5e7eb; /* Fondo gris temporal */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Clase para la imagen que insertarás manualmente */
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hero-banner {
+                height: 200px; /* Reducir altura en móviles */
+            }
+        }
+
+        /* =========================================
+           CONTENEDOR PRINCIPAL (LAYOUT FLEXBOX)
+        ========================================= */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            display: flex;
+            gap: 40px;
+            align-items: center; /* Centrar verticalmente ambos bloques */
+            justify-content: space-between;
+        }
+
+        /* Columna Izquierda: Textos */
+        .content-text {
+            flex: 1 1 55%; /* Ocupa el 55% del espacio disponible */
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .page-description {
+            font-size: 1rem;
+            color: var(--text-body);
+            text-align: justify; /* Alineación justificada como en la imagen */
+        }
+
+        /* Columna Derecha: Botones */
+        .content-actions {
+            flex: 1 1 40%; /* Ocupa el 40% del espacio disponible */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* =========================================
+           BOTONES
+        ========================================= */
+        .btn-action {
+            width: 100%;
+            padding: 18px 24px;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px; /* Bordes redondeados */
+            font-family: var(--font-main);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            text-align: center;
+        }
+
+        .btn-action:hover {
+            background-color: var(--primary-blue-hover);
+        }
+
+        .btn-action:active {
+            transform: scale(0.98); /* Pequeño efecto al hacer clic */
+        }
+
+        /* =========================================
+           RESPONSIVE (MÓVILES Y TABLETS)
+        ========================================= */
+        @media (max-width: 900px) {
+            .main-container {
+                flex-direction: column; /* Apilar elementos verticalmente */
+                padding: 40px 20px;
+                gap: 30px;
+            }
+
+            .content-text, .content-actions {
+                flex: 1 1 100%;
+                width: 100%;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                text-align: center; /* Centrar texto en móvil suele verse mejor */
+            }
+
+            .page-description {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <img src="img/logo_w.png" alt="">
+    </header>
+
+    <div class="hero-banner">
+        <img src="img/portada.png" alt="Persona pagando con tarjeta en laptop" id="mainBannerImg">
+    </div>
+
+    <main class="main-container">
+        
+        <div class="content-text">
+            <h1 class="page-title">Pagos por Cuenta Contrato de la EAAB ESP</h1>
+            <p class="page-description">
+                Desde esta aplicación web usted podrá pagar múltiples facturas, financiaciones y/o estados de cuenta 
+                en una misma transacción. Si posee una lista de sus cuentas contrato, puede optar por cargarlas una a 
+                una mediante el uso del campo "Cuenta Contrato" o a través de un archivo de Excel XLSX.
+            </p>
+        </div>
+
+        <div class="content-actions">
+            <button type="button" class="btn-action" id="btnPagoIndividual">
+                Pago de factura individual
+            </button>
+            <button type="button" class="btn-action" id="btnPagoMultiple">
+                Pago de varias facturas
+            </button>
+        </div>
+
+    </main>
+
+   <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Referencias a los botones
+            const btnIndividual = document.getElementById('btnPagoIndividual');
+            const btnMultiple = document.getElementById('btnPagoMultiple');
+
+            // Redirección a pago.html para el botón "Pago de factura individual"
+            btnIndividual.addEventListener('click', () => {
+                window.location.href = 'pago.html';
+            });
+
+            // Redirección a pago.html para el botón "Pago de varias facturas"
+            btnMultiple.addEventListener('click', () => {
+                window.location.href = 'pago.html';
+            });
+
+            // Código opcional: Manejo de error si la imagen no se encuentra (para evitar cuadros rotos)
+            const bannerImg = document.getElementById('mainBannerImg');
+            if (bannerImg) {
+                bannerImg.addEventListener('error', function() {
+                    this.style.display = 'none'; 
+                });
+            }
+        });
+    </script>
+</body>
+</html>

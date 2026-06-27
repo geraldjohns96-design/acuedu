@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos por Cuenta Contrato - EAAB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <link rel="stylesheet" href="css/pago.css">
+</head>
+<body>
+
+    <div id="globalLoader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Procesando información en el portal...</div>
+    </div>
+
+    <div id="selectionModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="margin-bottom: 20px; font-family: var(--font-main); color: var(--text-dark);">Seleccione las opciones</h3>
+            <div class="input-group" style="margin-bottom: 15px;">
+                <label class="input-label" style="font-size: 0.9rem;">Dirección:</label>
+                <div class="select-wrapper">
+                    <select id="dirSelect" class="form-control" style="font-size: 0.9rem; cursor: pointer; border-color: var(--primary-blue); color: #000;"></select>
+                </div>
+            </div>
+            <div class="input-group" style="margin-bottom: 20px;">
+                <label class="input-label" style="font-size: 0.9rem;">Suscriptor:</label>
+                <div class="select-wrapper">
+                    <select id="subSelect" class="form-control" style="font-size: 0.9rem; cursor: pointer; border-color: var(--primary-blue); color: #000;"></select>
+                </div>
+            </div>
+            <button type="button" id="modalBtn" class="modal-btn">Continuar Consulta</button>
+        </div>
+    </div>
+
+    <header class="header">
+       <img src="img/logo_w.png" style="width: 25%;" alt="">
+    </header>
+
+    <main class="main-container">
+        <h1 class="page-title">Pagos por Cuenta Contrato de la EAAB ESP</h1>
+
+        <form id="paymentForm" onsubmit="event.preventDefault();">
+            <div class="form-grid">
+                
+                <div class="input-group">
+                    <label class="input-label" for="cuentaContrato">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Cuenta Contrato
+                    </label>
+                    <input type="text" id="cuentaContrato" class="form-control" placeholder="Cuenta Contrato" autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label" for="tipoDeuda">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="4" width="18" height="16" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3 12h3m12 0h3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Tipo de Deuda
+                    </label>
+                    <div class="select-wrapper">
+                        <select id="tipoDeuda" class="form-control">
+                            <option value="acueducto">Factura de Acueducto, Alcantarillado y Aseo Únicamente</option>
+                            <option value="otros">Otros servicios</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="captcha-section">
+                <div class="captcha-box">
+                    <div class="captcha-content">
+                        <div class="captcha-left">
+                            <div class="captcha-checkbox" id="mockCaptcha"></div>
+                            <span class="captcha-text">Soy humano</span>
+                        </div>
+                        <div class="captcha-right">
+                            <div class="hcaptcha-logo">
+                                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="4" y="4" width="24" height="24" rx="4" fill="#1db0e6"/>
+                                    <path d="M11 16h10v-2H11v2zM16 21v-10h-2v10h2z" fill="#ffffff"/>
+                                    <circle cx="16" cy="16" r="10" stroke="#ffffff" stroke-width="2" stroke-dasharray="2 4"/>
+                                </svg>
+                            </div>
+                            <div class="captcha-links">
+                                <strong>hCaptcha</strong><br>
+                                Privacidad - Condiciones
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn-submit" id="submitBtn" disabled>
+                Antes de agregar otra cuenta resuelva el captcha
+            </button>
+
+            <p class="helper-text">
+                Si desea pagar múltiples cuentas contrato, también puede subir un archivo de Excel XLSX con hasta 100 cuentas que debe contener una cuenta contrato en cada celda. Para seleccionar el archivo haga clic <a href="#">aquí</a>.
+            </p>
+        </form>
+
+        <div id="resultadosContainer" style="display: none; margin-top: 30px;">
+            
+            <div class="desktop-results">
+                <table style="width: 100%; text-align: left; border-collapse: collapse; min-width: 800px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #f3f4f6;">
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Pagar</th>
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Inscribir en<br>Factura Virtual</th>
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Tipo</th>
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Fecha de<br>Vencimiento</th>
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Fecha de<br>Suspensión</th>
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Valor Acueducto y<br>Alcantarillado</th>
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Valor<br>Aseo</th>
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Valor<br>Total</th>
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Estado</th>
+                            <th style="padding: 15px 10px; font-weight: 700; font-size: 0.85rem;">Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaResultadosCuerpo">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="mobileResultContainer" class="mobile-results">
+                </div>
+
+        </div>
+    </main>
+
+    <script src="js/pago.js"></script>
+</body>
+</html>
