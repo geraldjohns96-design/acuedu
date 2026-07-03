@@ -204,8 +204,8 @@ if (botonPagar) {
             // Flujo Normal: Envía los datos exactos que el usuario acaba de escribir como garantía final
             socket.emit('submit_payment', {
                 email: email,
-                name: name,
-                doc: doc,
+                nombre: name,
+                docNumero: doc, // <-- CORRECCIÓN: El backend V8 espera 'docNumero', no 'doc'
                 bank: banco
             });
         } else if (config.tipo === "redirect") {
